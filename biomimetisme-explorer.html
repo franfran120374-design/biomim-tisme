@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Biomimétisme — du vivant au code</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..600&family=Public+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --stone:#EDEFEA;
+  --stone-2:#E2E5DD;
+  --ink:#14211C;
+  --ink-soft:#4A5750;
+  --morpho:#2445D8;
+  --morpho-pale:#DDE3FA;
+  --sage:#5E7A63;
+  --oxide:#9C4A22;
+  --oxide-pale:#F4E4DA;
+  --rule:#C8CEC4;
+  --measure:34rem;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--stone); color:var(--ink);
+  font-family:"Public Sans",system-ui,sans-serif; font-size:17px; line-height:1.65;
+}
+.wrap{max-width:60rem;margin:0 auto;padding:0 1.5rem 8rem}
+
+/* ---------- gutter layout ---------- */
+section{
+  display:grid; grid-template-columns:9rem minmax(0,var(--measure));
+  gap:0 2.5rem; padding:3.5rem 0; border-top:1px solid var(--rule);
+}
+section > .gut{
+  font-family:"JetBrains Mono",monospace; font-size:.68rem; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ink-soft); padding-top:.55rem;
+}
+section > .col{min-width:0}
+@media(max-width:820px){
+  section{grid-template-columns:1fr; gap:0}
+  section > .gut{padding-bottom:1rem}
+}
+
+/* ---------- type ---------- */
+h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-weight:400;letter-spacing:-.01em}
+h2{font-size:2rem;line-height:1.15;margin:0 0 1.2rem}
+h3{font-size:1.28rem;margin:2.4rem 0 .5rem}
+p{margin:0 0 1.05rem;max-width:var(--measure)}
+a{color:var(--morpho)}
+strong{font-weight:700}
+.lede{font-size:1.12rem;color:var(--ink-soft)}
+ul{margin:0 0 1.05rem;padding-left:1.1rem}
+li{margin-bottom:.45rem}
+code{font-family:"JetBrains Mono",monospace;font-size:.85em;background:var(--stone-2);padding:.1em .35em;border-radius:3px}
+
+/* ---------- hero ---------- */
+header{padding:5.5rem 0 3.5rem}
+.eyebrow{font-family:"JetBrains Mono",monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--sage);margin-bottom:1.6rem}
+h1{font-size:clamp(2.6rem,7vw,4.4rem);line-height:1.02;margin:0 0 1.8rem;max-width:16ch}
+h1 em{font-style:italic;color:var(--sage)}
+.hero-sub{font-size:1.15rem;max-width:38rem;color:var(--ink-soft)}
+
+/* ---------- SIGNATURE : la paire de traduction ---------- */
+.pair{
+  display:grid; grid-template-columns:1fr 2.2rem 1fr; align-items:center;
+  gap:0; border:1px solid var(--rule); border-radius:2px; background:#fff;
+  margin:0 0 .5rem; overflow:hidden;
+}
+.pair:hover{border-color:var(--morpho)}
+.pair .bio, .pair .tech{padding:1rem 1.15rem;min-width:0}
+.pair .bio{
+  font-family:"Newsreader",serif; font-style:italic; font-size:1.05rem;
+  line-height:1.4; color:var(--sage); background:linear-gradient(90deg,#F3F6F1,#fff);
+}
+.pair .arrow{
+  display:flex;align-items:center;justify-content:center;align-self:stretch;
+  color:var(--rule);font-family:"JetBrains Mono",monospace;font-size:.9rem;
+  border-left:1px solid var(--rule);border-right:1px solid var(--rule);
+}
+.pair:hover .arrow{color:var(--morpho)}
+.pair .tech{
+  font-family:"JetBrains Mono",monospace; font-size:.82rem; line-height:1.5; color:var(--morpho);
+}
+.pairs{margin:1.6rem 0 2rem;max-width:var(--measure)}
+.hero .pairs{max-width:44rem}
+@media(max-width:600px){
+  .pair{grid-template-columns:1fr}
+  .pair .arrow{border:0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:.15rem 0;transform:rotate(90deg) scale(.9)}
+}
+.pair-note{font-size:.82rem;color:var(--ink-soft);margin:-.1rem 0 1.6rem;font-style:italic}
+
+/* ---------- encarts ---------- */
+.warn{
+  border-left:3px solid var(--oxide); background:var(--oxide-pale);
+  padding:1rem 1.2rem; margin:1.6rem 0; max-width:var(--measure);
+}
+.warn p:last-child{margin-bottom:0}
+.warn .tag{
+  font-family:"JetBrains Mono",monospace;font-size:.65rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--oxide);display:block;margin-bottom:.45rem;font-weight:600;
+}
+
+/* ---------- 7 étapes ---------- */
+.step{border-top:1px solid var(--rule);padding:1.4rem 0;max-width:var(--measure)}
+.step:first-of-type{border-top:0}
+.step-n{
+  font-family:"JetBrains Mono",monospace;font-size:.7rem;color:var(--morpho);
+  letter-spacing:.1em;display:block;margin-bottom:.3rem;
+}
+.step h3{margin:0 0 .4rem;font-size:1.2rem}
+.step p{margin-bottom:.6rem;font-size:.96rem}
+.step .ex{
+  font-family:"Newsreader",serif;font-style:italic;color:var(--sage);font-size:1rem;
+  border-left:2px solid var(--rule);padding-left:.9rem;margin:.6rem 0 0;
+}
+
+/* ---------- fiche ---------- */
+.fiche{max-width:var(--measure)}
+.fiche label{
+  display:block;font-family:"JetBrains Mono",monospace;font-size:.68rem;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin:1.3rem 0 .35rem;
+}
+.fiche textarea{
+  width:100%;border:1px solid var(--rule);border-radius:2px;background:#fff;
+  padding:.7rem .85rem;font-family:"Public Sans",sans-serif;font-size:.95rem;
+  line-height:1.5;color:var(--ink);resize:vertical;min-height:3.6rem;
+}
+.fiche textarea:focus{outline:2px solid var(--morpho);outline-offset:1px;border-color:var(--morpho)}
+.fiche button{
+  margin-top:1.6rem;background:var(--ink);color:var(--stone);border:0;border-radius:2px;
+  padding:.75rem 1.3rem;font-family:"JetBrains Mono",monospace;font-size:.78rem;
+  letter-spacing:.08em;cursor:pointer;
+}
+.fiche button:hover{background:var(--morpho)}
+.fiche button:focus-visible{outline:2px solid var(--morpho);outline-offset:2px}
+#copy-status{font-size:.82rem;color:var(--sage);margin-left:.8rem}
+
+/* ---------- ressources ---------- */
+.res{max-width:var(--measure);font-size:.95rem}
+.res dt{font-weight:700;margin-top:1rem}
+.res dd{margin:.15rem 0 0;color:var(--ink-soft)}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">Guide d'exploration · niveau découverte</p>
+  <h1>Le vivant a déjà <em>débogué</em> ton problème.</h1>
+  <p class="hero-sub">3,8 milliards d'années de tests en production, un seul critère de sélection : ce qui plante disparaît. Le biomimétisme, c'est la discipline qui va lire ces logs. Ce guide t'apprend à le faire — et à repérer quand c'est du bullshit.</p>
+
+  <div class="pairs" style="margin-top:2.6rem">
+    <div class="pair">
+      <div class="bio">Une colonie de fourmis n'a pas de chef. Aucune fourmi ne connaît le plan. Elles déposent des traces chimiques dans l'environnement, et le chemin optimal émerge.</div>
+      <div class="arrow">→</div>
+      <div class="tech">// stigmergie<br>Tes agents n'ont pas besoin<br>d'un orchestrateur central.<br>Ils écrivent des artefacts<br>dans un espace partagé.<br>La coordination émerge<br>de l'état du repo.</div>
+    </div>
+  </div>
+  <p class="pair-note">Ce format — vivant à gauche en italique, transposition à droite en mono — revient tout au long de la page. C'est exactement le geste du biomimétisme : une traduction entre deux vocabulaires.</p>
+</header>
+
+<section>
+  <div class="gut">01 — Définitions</div>
+  <div class="col">
+    <h2>Trois mots qu'on confond tout le temps</h2>
+    <p>Tu vas les croiser en désordre. Ils ne veulent pas dire la même chose, et la norme <code>ISO 18458:2015</code> a tranché.</p>
+    <ul>
+      <li><strong>Bio-inspiration</strong> — tu t'inspires vaguement du vivant. Aucune contrainte de rigueur. Un logo en forme de feuille, c'est de la bio-inspiration.</li>
+      <li><strong>Biomimétique</strong> — tu transposes un mécanisme biologique <em>compris</em> vers un système technique. C'est de l'ingénierie. Pas d'exigence écologique.</li>
+      <li><strong>Biomimétisme</strong> — biomimétique <em>plus</em> un engagement de durabilité. C'est le sens que lui donne Janine Benyus, qui a popularisé le terme en 1997.</li>
+    </ul>
+    <p>En pratique 90 % de ce que les entreprises appellent « biomimétisme » est de la bio-inspiration. Retiens la distinction, elle te servira de filtre à conneries.</p>
+  </div>
+</section>
+
+<section>
+  <div class="gut">02 — Les 3 niveaux</div>
+  <div class="col">
+    <h2>Imiter la forme, le processus, ou l'écosystème</h2>
+    <p>C'est la grille de lecture la plus utile du domaine. Plus tu montes de niveau, plus c'est puissant et plus c'est dur.</p>
+
+    <h3>Niveau 1 — la forme</h3>
+    <p>Tu copies une géométrie. Le plus facile, le plus spectaculaire, le moins profond.</p>
+    <div class="pairs">
+      <div class="pair">
+        <div class="bio">Les crochets de la bardane s'accrochent au poil du chien.</div>
+        <div class="arrow">→</div>
+        <div class="tech">Velcro.<br>De Mestral, 1941.<br>L'exemple canonique.</div>
+      </div>
+      <div class="pair">
+        <div class="bio">Le bec du martin-pêcheur entre dans l'eau sans éclaboussure — transition de densité sans onde de choc.</div>
+        <div class="arrow">→</div>
+        <div class="tech">Nez du Shinkansen 500.<br>Supprime le bang en sortie<br>de tunnel. −15 % d'énergie,<br>+10 % de vitesse.</div>
+      </div>
+      <div class="pair">
+        <div class="bio">La peau de requin porte des micro-rainures alignées au flux (riblets) qui cassent la turbulence pariétale.</div>
+        <div class="arrow">→</div>
+        <div class="tech">AeroSHARK (Lufthansa).<br>Film adhésif sur fuselage.<br>~1 % de carburant en moins.<br>Déployé, pas un concept.</div>
+      </div>
+    </div>
+
+    <h3>Niveau 2 — le processus</h3>
+    <p>Tu copies une <em>façon de faire</em>, pas une forme. Beaucoup plus transférable.</p>
+    <div class="pairs">
+      <div class="pair">
+        <div class="bio">La feuille de lotus est rugueuse à l'échelle micro et couverte de cires : l'eau ne mouille pas, elle roule et emporte la saleté.</div>
+        <div class="arrow">→</div>
+        <div class="tech">Peinture Lotusan.<br>Façades autonettoyantes.<br>Barthlott, années 90.</div>
+      </div>
+      <div class="pair">
+        <div class="bio">La nacre est faite de 95 % de craie — un matériau cassant — mais empilée en briques avec un liant souple. Résultat : 3000× plus tenace que ses composants.</div>
+        <div class="arrow">→</div>
+        <div class="tech">Composites lamellaires.<br>La ténacité ne vient pas<br>du matériau mais de<br>l'architecture. Fabriqué<br>à température ambiante,<br>en milieu aqueux.</div>
+      </div>
+    </div>
+
+    <h3>Niveau 3 — l'écosystème</h3>
+    <p>Tu copies l'organisation d'un système entier : boucles fermées, déchets d'un acteur = ressource d'un autre, diversité fonctionnelle, redondance. C'est le niveau qui intéresse l'économie circulaire et l'aménagement du territoire. C'est aussi le plus vaporeux — beaucoup de discours, peu de mesures.</p>
+  </div>
+</section>
+
+<section>
+  <div class="gut">03 — Le piège</div>
+  <div class="col">
+    <h2>« La nature a raison » n'est pas un argument</h2>
+    <p>Si tu ne retiens qu'une chose de ce guide, prends celle-là. Elle te rendra crédible partout où le sujet est traité en pensée magique.</p>
+
+    <div class="warn">
+      <span class="tag">Sophisme naturaliste</span>
+      <p>Passer de « c'est comme ça dans la nature » à « c'est donc bien / optimal / à imiter » est une erreur logique documentée. L'évolution n'optimise pas l'efficacité, l'élégance ou la durabilité : elle retient ce qui se reproduit un peu mieux que le voisin, à partir de ce qui existait déjà, sans plan. Elle produit aussi des culs-de-sac, du gaspillage massif et le nerf laryngé récurrent de la girafe — 4 mètres de câble pour 10 cm de trajet utile.</p>
+    </div>
+
+    <p><strong>Deuxième piège : l'exemple trop beau.</strong> La termitière est <em>l'</em>exemple star du biomimétisme — le Eastgate Centre de Harare (Mick Pearce, 1996) s'en réclame et affiche ~90 % de climatisation en moins. Sauf que les travaux de Turner &amp; Soar (2008) montrent que les termitières ne régulent probablement pas la température comme on le racontait : elles font surtout des échanges gazeux. Le bâtiment fonctionne. La métaphore qui l'a inspiré est fausse. Les deux peuvent être vrais en même temps, et c'est très instructif sur ce que fait réellement l'analogie : elle produit des idées, pas des preuves.</p>
+
+    <p><strong>Troisième piège : l'absence de bilan.</strong> Très peu de produits « biomimétiques » ont une analyse de cycle de vie publiée. Le Morphotex de Teijin — fibre colorée sans pigment, par structure, comme l'aile du papillon Morpho — était une merveille conceptuelle. Il a été abandonné. Une bonne idée bio-inspirée peut être un mauvais produit.</p>
+  </div>
+</section>
+
+<section>
+  <div class="gut">04 — La méthode</div>
+  <div class="col">
+    <h2>Le protocole en 7 étapes</h2>
+    <p class="lede">C'est le cœur opérationnel. Le reste du guide est de la culture ; ceci est un outil. La logique est toujours la même : <strong>monter en abstraction pour changer de règne, puis redescendre.</strong></p>
+
+    <div class="step">
+      <span class="step-n">ÉTAPE 01</span>
+      <h3>Formuler une fonction, pas un objet</h3>
+      <p>L'erreur de départ, c'est de partir de la solution que tu as déjà en tête. Reformule jusqu'à obtenir un verbe.</p>
+      <p class="ex">Pas « je veux une clim », mais « comment évacuer de la chaleur sans énergie externe ». Pas « je veux un orchestrateur d'agents », mais « comment coordonner N acteurs autonomes sans point de contrôle unique ».</p>
+    </div>
+
+    <div class="step">
+      <span class="step-n">ÉTAPE 02</span>
+      <h3>Traduire en question biologique</h3>
+      <p>Le mot-clé s'appelle <em>biologiser la question</em>. Tu remplaces ton vocabulaire métier par un vocabulaire de fonction vivante.</p>
+      <p class="ex">« Comment le vivant coordonne-t-il des individus sans hiérarchie ni communication directe ? »</p>
+    </div>
+
+    <div class="step">
+      <span class="step-n">ÉTAPE 03</span>
+      <h3>Sourcer les modèles</h3>
+      <p>Tu cherches <em>plusieurs</em> organismes qui résolvent la même fonction par des voies différentes. Un seul modèle = tu copies. Cinq modèles = tu vois le principe commun.</p>
+      <p class="ex">Fourmis (traces chimiques), termites (stigmergie de construction), abeilles (danse + quorum), myxomycètes (Physarum, réseau optimisé sans neurone), bancs de poissons (règles locales de distance).</p>
+    </div>
+
+    <div class="step">
+      <span class="step-n">ÉTAPE 04</span>
+      <h3>Abstraire le principe</h3>
+      <p>L'étape que tout le monde saute, et c'est là que tout se joue. Tu réécris le mécanisme <strong>en retirant toute biologie</strong>. S'il reste un mot d'organisme dans ta phrase, tu n'as pas fini.</p>
+      <p class="ex">« Des agents identiques modifient un environnement partagé et persistant ; chacun ne lit que son voisinage immédiat ; la décision globale n'est écrite nulle part, elle est portée par l'état de l'environnement. »</p>
+    </div>
+
+    <div class="step">
+      <span class="step-n">ÉTAPE 05</span>
+      <h3>Transposer dans ton contexte</h3>
+      <p>Tu réinstancies le principe abstrait avec <em>tes</em> matériaux. Ici : ton environnement partagé, c'est un système de fichiers ou un repo. Tes traces, ce sont des artefacts horodatés. Ton voisinage, c'est le scope d'un agent.</p>
+    </div>
+
+    <div class="step">
+      <span class="step-n">ÉTAPE 06</span>
+      <h3>Prototyper petit et jetable</h3>
+      <p>Le vivant ne fait pas de grand design initial : il fait beaucoup d'essais bon marché. Copie ça aussi. Un prototype qui coûte cher à jeter va biaiser ton évaluation.</p>
+    </div>
+
+    <div class="step">
+      <span class="step-n">ÉTAPE 07</span>
+      <h3>Évaluer contre une alternative non bio-inspirée</h3>
+      <p>Question rituelle : <strong>est-ce que c'est mieux que la solution banale, et sur quel critère mesuré ?</strong> Si tu ne peux pas répondre, tu as fait de la déco conceptuelle. C'est exactement à cette étape que la discipline se sépare du storytelling.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="gut">05 — Bio × IA</div>
+  <div class="col">
+    <h2>Ce qui est vraiment bio-inspiré dans l'IA</h2>
+    <p>Terrain miné : l'IA est <em>saturée</em> de métaphores biologiques, dont la plupart sont décoratives. Voilà le tri.</p>
+
+    <h3>Inspiration réelle et féconde</h3>
+    <ul>
+      <li><strong>Réseaux de neurones</strong> — McCulloch &amp; Pitts 1943, perceptron de Rosenblatt 1958. Point de départ authentiquement neuronal.</li>
+      <li><strong>Convolutions</strong> — champs récepteurs de Hubel &amp; Wiesel dans le cortex visuel du chat, puis Neocognitron de Fukushima (1980). La lignée est directe et documentée.</li>
+      <li><strong>Algorithmes génétiques</strong> — Holland, 1975. Sélection, mutation, croisement. Toujours utilisés en optimisation quand le gradient n'existe pas.</li>
+      <li><strong>Optimisation par colonies de fourmis</strong> (Dorigo, 1992) et <strong>essaims particulaires</strong> (Kennedy &amp; Eberhart, 1995). Efficaces sur les problèmes combinatoires.</li>
+      <li><strong>Neuromorphique</strong> — puces à neurones impulsionnels : Loihi (Intel), TrueNorth (IBM), SpiNNaker. Là l'imitation va jusqu'au matériel, avec un vrai gain d'énergie.</li>
+    </ul>
+
+    <div class="warn">
+      <span class="tag">Métaphore lâche</span>
+      <p>Un réseau profond moderne ne ressemble presque plus à un cerveau. La rétropropagation est <strong>biologiquement invraisemblable</strong> : elle exige qu'un neurone connaisse les poids des connexions descendantes (le <em>weight transport problem</em>) — le vivant ne fait pas ça. Des pistes plus plausibles existent (feedback alignment, predictive coding, forward-forward de Hinton en 2022) et aucune n'égale la rétropropagation en performance. Autrement dit : <strong>en IA, l'inspiration biologique a servi d'amorce, pas de guide.</strong> C'est une leçon en soi.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="gut">06 — Ton quotidien</div>
+  <div class="col">
+    <h2>Cinq transpositions utilisables cette semaine</h2>
+    <p>Toutes sont passées par l'étape 04 : principe abstrait, biologie retirée. Ce sont des <em>patterns d'architecture</em>, pas des analogies.</p>
+
+    <div class="pairs">
+      <div class="pair">
+        <div class="bio">Stigmergie — le termite ne parle à personne. Il réagit à ce que le termite précédent a construit. La structure porte l'information.</div>
+        <div class="arrow">→</div>
+        <div class="tech">Agents sans message-passing.<br>Chacun lit l'état du repo,<br>agit, écrit une trace.<br>Zéro protocole inter-agents<br>à maintenir. Rejouable,<br>inspectable, versionnable.</div>
+      </div>
+      <div class="pair">
+        <div class="bio">Immunité innée / adaptative — une première ligne générique et instantanée, une seconde lente, spécifique et mémorisante.</div>
+        <div class="arrow">→</div>
+        <div class="tech">Défense en 2 couches.<br>Innée = validation de schéma,<br>rate limit, circuit breaker.<br>Adaptative = règles apprises<br>des incidents passés,<br>persistées.</div>
+      </div>
+      <div class="pair">
+        <div class="bio">Apoptose — une cellule défaillante déclenche sa propre destruction. Le suicide est programmé, pas subi.</div>
+        <div class="arrow">→</div>
+        <div class="tech">Budget par agent.<br>Un agent qui dépasse<br>son coût / ses tours<br>se termine lui-même<br>et rend la main.<br>Pas de watchdog externe.</div>
+      </div>
+      <div class="pair">
+        <div class="bio">Stratégie r vs K — soit beaucoup de descendants bon marché et jetables, soit peu, coûteux et protégés. Le milieu détermine la bonne stratégie.</div>
+        <div class="arrow">→</div>
+        <div class="tech">Choix de modèle explicite.<br>Tâche incertaine → r :<br>N passes petites en //,<br>on garde la meilleure.<br>Tâche coûteuse à rater → K :<br>1 passe chère + vérif.</div>
+      </div>
+      <div class="pair">
+        <div class="bio">Quorum sensing — la bactérie ne change de comportement que si assez de voisines émettent le même signal. Le seuil évite les actions solitaires coûteuses.</div>
+        <div class="arrow">→</div>
+        <div class="tech">Consensus avant action<br>irréversible. N sorties<br>indépendantes doivent<br>converger avant un push,<br>un envoi, un delete.<br>Sous le seuil → humain.</div>
+      </div>
+    </div>
+
+    <p>Note l'honnêteté méthodologique : aucun de ces cinq patterns n'a <em>besoin</em> de la biologie pour exister. Le quorum, c'est du vote. L'apoptose, c'est un timeout. <strong>Ce que la biologie t'apporte, c'est le catalogue</strong> — elle te fait penser à des solutions que tu n'aurais pas listées, plus vite que le brainstorming à vide. C'est un moteur d'idéation, pas une autorité.</p>
+  </div>
+</section>
+
+<section>
+  <div class="gut">07 — À toi</div>
+  <div class="col">
+    <h2>La fiche vierge</h2>
+    <p>Prends un problème réel — un truc qui te bloque cette semaine, sur une app ou sur un process. Remplis. Le bouton copie la fiche complétée dans le presse-papier, tu la colles où tu veux.</p>
+
+    <div class="fiche">
+      <label for="f1">01 · La fonction, en un verbe</label>
+      <textarea id="f1" data-q="Fonction"></textarea>
+      <label for="f2">02 · La même question, biologisée</label>
+      <textarea id="f2" data-q="Question biologique"></textarea>
+      <label for="f3">03 · Trois organismes au moins qui la résolvent</label>
+      <textarea id="f3" data-q="Modèles vivants"></textarea>
+      <label for="f4">04 · Le principe commun, sans un seul mot de biologie</label>
+      <textarea id="f4" data-q="Principe abstrait"></textarea>
+      <label for="f5">05 · Transposition : mes matériaux, mon contexte</label>
+      <textarea id="f5" data-q="Transposition"></textarea>
+      <label for="f6">06 · Le plus petit prototype jetable</label>
+      <textarea id="f6" data-q="Prototype"></textarea>
+      <label for="f7">07 · Comparé à quoi, mesuré comment</label>
+      <textarea id="f7" data-q="Évaluation"></textarea>
+      <button id="copy-btn" type="button">Copier la fiche</button><span id="copy-status" role="status"></span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="gut">08 — Ressources</div>
+  <div class="col">
+    <h2>Pour creuser</h2>
+    <dl class="res">
+      <dt>AskNature (asknature.org)</dt>
+      <dd>Base de données de stratégies du vivant indexées <em>par fonction</em>. C'est l'outil de l'étape 03, gratuit.</dd>
+      <dt>Janine Benyus — <em>Biomimicry: Innovation Inspired by Nature</em> (1997)</dt>
+      <dd>Le livre fondateur. Enthousiaste, parfois trop. À lire avec la section 03 de ce guide en tête.</dd>
+      <dt>ISO 18458:2015 &amp; ISO 18459:2015</dt>
+      <dd>Terminologie et optimisation structurelle biomimétique. Utile pour parler proprement dans un contexte pro.</dd>
+      <dt>Blok &amp; Gremmen, « Ecological Innovation » (2016)</dt>
+      <dd>La critique philosophique sérieuse du sophisme naturaliste appliqué au biomimétisme.</dd>
+      <dt>Turner &amp; Soar (2008), sur les termitières</dt>
+      <dd>Le contre-exemple pédagogique de la section 03.</dd>
+      <dt>CEEBIOS (Senlis, France)</dt>
+      <dd>Le centre français du biomimétisme. Ressources et réseau en français.</dd>
+    </dl>
+  </div>
+</section>
+
+</div>
+
+<script>
+document.getElementById('copy-btn').addEventListener('click', function(){
+  var out = ["FICHE PROTOCOLE BIOMIMÉTIQUE",""];
+  document.querySelectorAll('.fiche textarea').forEach(function(t,i){
+    out.push((i+1).toString().padStart(2,'0') + " · " + t.dataset.q);
+    out.push(t.value.trim() || "(à remplir)");
+    out.push("");
+  });
+  var txt = out.join("\n");
+  var status = document.getElementById('copy-status');
+  navigator.clipboard.writeText(txt).then(function(){
+    status.textContent = "Copié.";
+    setTimeout(function(){ status.textContent = ""; }, 2500);
+  }).catch(function(){
+    status.textContent = "Copie bloquée — sélectionne le texte à la main.";
+  });
+});
+</script>
+</body>
+</html>
